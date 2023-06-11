@@ -23,8 +23,16 @@ export class RegisterComponent {
       alert('Please enter a password.');
       return;
     }
+    if (this.name === '') {
+      alert('Please your name.');
+      return;
+    }
+    if (this.username === '') {
+      alert('Please a valid username (no spaces).');
+      return;
+    }
 
-    this.auth.register(this.email, this.password);
+    this.auth.register(this.email, this.password, this.name, this.username);
     this.email = '';
     this.password = '';
   }
