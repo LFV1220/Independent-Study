@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -6,20 +6,18 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   email: string = '';
   password: string = '';
 
   constructor(private auth: AuthService) {}
 
-  ngOnInit(): void {}
-
   login() {
-    if (this.email == '') {
+    if (this.email === '') {
       alert('Please enter a valid email.');
       return;
     }
-    if (this.password == '') {
+    if (this.password === '') {
       alert('Please enter a password.');
       return;
     }
