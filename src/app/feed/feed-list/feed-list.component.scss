@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  margin-top: 3rem;
+}
+
+.container {
+  .columns {
+    flex-direction: column;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+}
