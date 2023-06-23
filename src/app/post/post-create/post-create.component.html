@@ -1,20 +1,55 @@
-<p>post-create works!</p>
+<section class="section">
+  <div class="container">
+    <h2 class="title">Create a Post</h2>
 
-<div class="container">
-  <div class="card">
-    <div class="field">
-      <label class="label">Title</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Enter a post title" />
+    <form (submit)="createPost(postForm)" #postForm="ngForm">
+      <div class="field">
+        <label class="label">Title</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Enter the post title"
+            name="title"
+            placeholder="Post Title"
+            ngModel
+            required
+          />
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label">Post Content</label>
-      <textarea
-        class="textarea"
-        placeholder="Enter post content..."
-        rows="10"
-      ></textarea>
-    </div>
+
+      <div class="field">
+        <label class="label">Content</label>
+        <div class="control">
+          <textarea
+            class="textarea"
+            placeholder="Enter the post content"
+            name="content"
+            placeholder="Post Content"
+            ngModel
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- <div class="field">
+        <label class="label">Image</label>
+        <div class="control">
+          <input
+            class="input"
+            type="file"
+            accept="image/*"
+            (change)="onImageSelected($event)"
+            name="image"
+          />
+        </div>
+      </div> -->
+
+      <div class="field">
+        <div class="control">
+          <button type="submit" class="button is-primary">Create Post</button>
+        </div>
+      </div>
+    </form>
   </div>
-</div>
+</section>
