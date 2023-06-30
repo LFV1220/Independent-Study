@@ -23,6 +23,11 @@ export class FeedListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onDelete(event: Event, postId: string) {
+    event?.preventDefault();
+    this.postsService.deletePost(postId);
+  }
+
   ngOnDestroy(): void {
     this.postsSub.unsubscribe();
   }
