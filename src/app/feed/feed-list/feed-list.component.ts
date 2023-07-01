@@ -10,28 +10,25 @@ import { Subscription } from 'rxjs';
 })
 export class FeedListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
+  isLoading = false;
   private postsSub!: Subscription;
-  // posts = [
-  //   {
-  //     title: 'Post 1',
-  //     content: 'This is the content of post 1.',
-  //   },
-  //   {
-  //     title: 'Post 2',
-  //     content: 'This is the content of post 2.',
-  //   },
-  //   // Add more posts as needed
-  // ];
 
   constructor(public postsService: PostsService) {}
 
   ngOnInit() {
-    this.posts = this.postsService.getPosts();
+    this.isLoading = true;
+    this.postsService.getPosts();
     this.postsSub = this.postsService
       .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
+        this.isLoading = false;
         this.posts = posts;
       });
+  }
+
+  onDelete(event: Event, postId: string) {
+    event?.preventDefault();
+    this.postsService.deletePost(postId);
   }
 
   ngOnDestroy(): void {

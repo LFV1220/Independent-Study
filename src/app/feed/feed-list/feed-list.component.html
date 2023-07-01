@@ -1,15 +1,30 @@
 <div class="container">
-  <div class="columns">
+  <progress
+    class="progress is-small is-primary"
+    max="100"
+    *ngIf="isLoading"
+  ></progress>
+  <div class="columns" *ngIf="!isLoading">
     <div class="column" *ngFor="let post of posts">
       <div class="card">
         <div class="card-content">
-          <p class="title">{{ post.title }}</p>
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4">{{ post.title }}</p>
+            </div>
+          </div>
           <div class="content">
             {{ post.content }}
           </div>
         </div>
+        <footer class="card-footer">
+          <a class="card-footer-item" [routerLink]="['/edit', post.id]">Edit</a>
+          <a class="card-footer-item" (click)="onDelete($event, post.id)"
+            >Delete</a
+          >
+        </footer>
       </div>
     </div>
-    <p *ngIf="posts.length <= 0">No posts added yet!</p>
+    <p *ngIf="posts.length <= 0 && !isLoading">No posts added yet!</p>
   </div>
 </div>

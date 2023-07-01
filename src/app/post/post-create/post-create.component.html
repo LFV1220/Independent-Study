@@ -1,8 +1,12 @@
 <section class="section">
   <div class="container">
     <h2 class="title">Create a Post</h2>
-
-    <form (submit)="createPost(postForm)" #postForm="ngForm">
+    <progress
+      class="progress is-small is-primary"
+      max="100"
+      *ngIf="isLoading"
+    ></progress>
+    <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
       <div class="field">
         <label class="label">Title</label>
         <div class="control">
@@ -12,7 +16,7 @@
             placeholder="Enter the post title"
             name="title"
             placeholder="Post Title"
-            ngModel
+            [ngModel]="post?.title"
             required
           />
         </div>
@@ -26,7 +30,7 @@
             placeholder="Enter the post content"
             name="content"
             placeholder="Post Content"
-            ngModel
+            [ngModel]="post?.content"
             required
           ></textarea>
         </div>
