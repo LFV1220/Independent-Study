@@ -1,11 +1,14 @@
 import { AbstractControl } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, of } from 'rxjs';
 
 export const Type = (
   control: AbstractControl
 ):
   | Promise<null | { [key: string]: any }>
   | Observable<{ [key: string]: any }> => {
+  if (typeof control.value === 'string') {
+    return Promise.resolve(null);
+  }
   const file = control.value as File;
   const fileReader = new FileReader();
   fileReader.onloadend = () => {};
