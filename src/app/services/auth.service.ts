@@ -12,7 +12,6 @@ export class AuthService {
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
   name: string = '';
-  username: string = '';
   isLoggedIn: boolean = false;
 
   constructor(private fireauth: AngularFireAuth, private router: Router) {}
@@ -33,12 +32,11 @@ export class AuthService {
   }
 
   // register method
-  register(email: string, password: string, name: string, username: string) {
+  register(email: string, password: string, name: string) {
     this.fireauth.createUserWithEmailAndPassword(email, password).then(
       () => {
         alert('Registration successful!');
         this.name = name;
-        this.username = username;
         this.login(email, password);
       },
       (err) => {

@@ -20,7 +20,7 @@
             {{ post.content }}
           </div>
         </div>
-        <footer class="card-footer">
+        <footer class="card-footer" *ngIf="isSignedIn">
           <a class="card-footer-item" [routerLink]="['/edit', post.id]">Edit</a>
           <a class="card-footer-item" (click)="onDelete($event, post.id)"
             >Delete</a

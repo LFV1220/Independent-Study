@@ -47,10 +47,10 @@
         <a class="navbar-link"> Canvas </a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item"> Dashboard </a>
-          <a class="navbar-item"> Courses </a>
-          <a class="navbar-item"> Calender </a>
-          <a class="navbar-item"> Inbox </a>
+          <a class="navbar-item" (click)="openNewTab(1)"> Dashboard </a>
+          <a class="navbar-item" (click)="openNewTab(2)"> Courses </a>
+          <a class="navbar-item" (click)="openNewTab(3)"> Calender </a>
+          <a class="navbar-item" (click)="openNewTab(4)"> Inbox </a>
         </div>
       </div>
     </div>
@@ -83,14 +83,7 @@
             <p>Signed In</p>
           </div>
           <div>
-            <button
-              class="button is-light"
-              routerLink="/"
-              routerLinkActive="active"
-              ariaCurrentWhenActive="page"
-            >
-              Logout
-            </button>
+            <button class="button is-light" (click)="onLogout()">Logout</button>
           </div>
         </ng-template>
       </div>
