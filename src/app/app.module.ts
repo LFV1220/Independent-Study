@@ -13,6 +13,7 @@ import { PostCreateComponent } from './post/post-create/post-create.component';
 import { FeedListComponent } from './feed/feed-list/feed-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { RegisterComponent } from './auth/register/register.component';
     AngularFireAuthModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

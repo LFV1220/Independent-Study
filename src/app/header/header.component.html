@@ -41,7 +41,7 @@
         Post
       </a>
 
-      <a class="navbar-item"> Events </a>
+      <a class="navbar-item"> News </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link"> Canvas </a>
@@ -78,7 +78,21 @@
             </a>
           </div>
         </ng-template>
-        <ng-template #signedin> Signed In </ng-template>
+        <ng-template #signedin>
+          <div>
+            <p>Signed In</p>
+          </div>
+          <div>
+            <button
+              class="button is-light"
+              routerLink="/"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+            >
+              Logout
+            </button>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

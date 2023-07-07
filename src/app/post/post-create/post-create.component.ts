@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { PostsService } from 'src/app/services/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Type } from './type.validator';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-post-create',
@@ -18,15 +19,20 @@ export class PostCreateComponent implements OnInit {
   title: string = '';
   content: string = '';
   imagePreview: string | null = null;
-  // image: File | null;
   isLoading = false;
+  isSignedIn: boolean = false;
 
   constructor(
     public postsService: PostsService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
+    this.auth.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
+      this.isSignedIn = isLoggedIn;
+    });
+
     this.form = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)],
