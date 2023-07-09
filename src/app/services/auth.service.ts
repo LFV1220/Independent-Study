@@ -9,13 +9,25 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private isLoggedInSubject: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
+  private nameSubject: BehaviorSubject<string> = new BehaviorSubject<string>(
+    ''
+  );
+  private emailSubject: BehaviorSubject<string> = new BehaviorSubject<string>(
+    ''
+  );
+  name$: Observable<string> = this.nameSubject.asObservable();
+  email$: Observable<string> = this.emailSubject.asObservable();
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
   name: string = '';
-  username: string = '';
+  email: string = '';
   isLoggedIn: boolean = false;
 
   constructor(private fireauth: AngularFireAuth, private router: Router) {}
+
+  getIsAuth() {
+    return this.isLoggedIn;
+  }
 
   // login method
   login(email: string, password: string) {
@@ -23,6 +35,7 @@ export class AuthService {
       () => {
         localStorage.setItem('token', 'true');
         this.router.navigate(['']);
+        this.emailSubject.next(email);
         this.isLoggedInSubject.next(true);
       },
       (err) => {
@@ -33,12 +46,12 @@ export class AuthService {
   }
 
   // register method
-  register(email: string, password: string, name: string, username: string) {
+  register(email: string, password: string, name: string) {
     this.fireauth.createUserWithEmailAndPassword(email, password).then(
       () => {
         alert('Registration successful!');
         this.name = name;
-        this.username = username;
+        this.email = email;
         this.login(email, password);
       },
       (err) => {
@@ -54,6 +67,7 @@ export class AuthService {
       () => {
         localStorage.removeItem('token');
         this.router.navigate(['']);
+        this.emailSubject.next('');
         this.isLoggedInSubject.next(false);
       },
       (err) => {

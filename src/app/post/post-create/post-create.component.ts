@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { PostsService } from 'src/app/services/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Type } from './type.validator';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-post-create',
@@ -18,15 +19,23 @@ export class PostCreateComponent implements OnInit {
   title: string = '';
   content: string = '';
   imagePreview: string | null = null;
-  // image: File | null;
   isLoading = false;
+  isSignedIn: boolean = false;
+  userEmail: string = '';
 
   constructor(
     public postsService: PostsService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
+    this.auth.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
+      this.isSignedIn = isLoggedIn;
+    });
+    this.auth.email$.subscribe((email: string) => {
+      this.userEmail = email;
+    });
     this.form = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)],
@@ -36,6 +45,7 @@ export class PostCreateComponent implements OnInit {
         validators: [Validators.required],
         asyncValidators: [Type],
       }),
+      creator: new FormControl(null, { validators: [Validators.required] }),
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('postId')) {
@@ -49,12 +59,13 @@ export class PostCreateComponent implements OnInit {
             title: postData.title,
             content: postData.content,
             imagePath: postData.imagePath,
-            // creator: postData.creator,
+            creator: this.userEmail,
           };
           this.form.setValue({
             title: this.post.title,
             content: this.post.content,
             image: this.post.imagePath,
+            creator: this.post.creator,
           });
         });
       } else {
@@ -76,22 +87,42 @@ export class PostCreateComponent implements OnInit {
   }
 
   onSavePost() {
-    if (this.form.invalid) {
+    if (
+      this.form.value.title === null ||
+      this.form.value.title === '' ||
+      this.form.value.title.length < 2
+    ) {
+      alert('Please enter a valid title!');
       return;
     }
+    if (
+      this.form.value.content === null ||
+      this.form.value.content === '' ||
+      this.form.value.title.length < 2
+    ) {
+      alert('Please enter some valid post content!');
+      return;
+    }
+    if (this.form.value.image === null || this.form.value.image === '') {
+      alert('Please select an image!');
+      return;
+    }
+
     this.isLoading = true;
     if (this.mode === 'create') {
       this.postsService.addPost(
         this.form.value.title,
         this.form.value.content,
-        this.form.value.image
+        this.form.value.image,
+        this.userEmail
       );
     } else {
       this.postsService.updatePost(
         this.postId!,
         this.form.value.title,
         this.form.value.content,
-        this.form.value.image
+        this.form.value.image,
+        this.form.value.creator
       );
     }
 

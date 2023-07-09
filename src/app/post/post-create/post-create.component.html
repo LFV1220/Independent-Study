@@ -1,5 +1,5 @@
 <section class="section">
-  <div class="container">
+  <div class="container" *ngIf="isSignedIn">
     <h2 class="title">Create a Post</h2>
     <progress
       class="progress is-small is-primary"
@@ -21,7 +21,6 @@
             placeholder="Enter the post title"
             formControlName="title"
           />
-          <p *ngIf="form?.get(title)?.invalid">Please enter a post title.</p>
         </div>
       </div>
 
@@ -33,7 +32,6 @@
             placeholder="Enter the post content"
             formControlName="content"
           ></textarea>
-          <p *ngIf="form?.get(content)?.invalid">Please enter a post title.</p>
         </div>
       </div>
 
@@ -64,5 +62,8 @@
         </div>
       </div>
     </form>
+  </div>
+  <div *ngIf="!isSignedIn">
+    <p>Please login or register to create a post!</p>
   </div>
 </section>

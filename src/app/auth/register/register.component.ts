@@ -10,7 +10,6 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   name: string = '';
-  username: string = '';
 
   constructor(private auth: AuthService) {}
 
@@ -27,12 +26,8 @@ export class RegisterComponent {
       alert('Please your name.');
       return;
     }
-    if (this.username === '') {
-      alert('Please a valid username (no spaces).');
-      return;
-    }
 
-    this.auth.register(this.email, this.password, this.name, this.username);
+    this.auth.register(this.email, this.password, this.name);
     this.email = '';
     this.password = '';
   }
