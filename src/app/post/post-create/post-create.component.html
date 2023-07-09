@@ -21,7 +21,6 @@
             placeholder="Enter the post title"
             formControlName="title"
           />
-          <p *ngIf="form?.get(title)?.invalid">Please enter a post title.</p>
         </div>
       </div>
 
@@ -33,7 +32,6 @@
             placeholder="Enter the post content"
             formControlName="content"
           ></textarea>
-          <p *ngIf="form?.get(content)?.invalid">Please enter a post title.</p>
         </div>
       </div>
 

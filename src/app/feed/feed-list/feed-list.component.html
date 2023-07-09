@@ -13,14 +13,17 @@
               <p class="title is-4">{{ post.title }}</p>
             </div>
           </div>
-          <div class="post-image">
+          <div class="post-image" *ngIf="post.imagePath">
             <img [src]="post.imagePath" [alt]="post.title" />
           </div>
           <div class="content">
             {{ post.content }}
           </div>
         </div>
-        <footer class="card-footer" *ngIf="isSignedIn">
+        <footer
+          class="card-footer"
+          *ngIf="isSignedIn && post.creator === this.userEmail"
+        >
           <a class="card-footer-item" [routerLink]="['/edit', post.id]">Edit</a>
           <a class="card-footer-item" (click)="onDelete($event, post.id)"
             >Delete</a

@@ -30,11 +30,17 @@ router.post(
   "",
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
-    const url = req.protocol + "://" + req.get("host");
+    let imagePath = "";
+    if (req.file || req.files.image) {
+      const url = req.protocol + "://" + req.get("host");
+      imagePath = url + "/images/" + req.file.filename;
+    }
+    console.log("imagePath: ", imagePath);
     const post = new Post({
       title: req.body.title,
       content: req.body.content,
-      imagePath: url + "/images/" + req.file.filename,
+      imagePath: imagePath,
+      creator: req.body.creator,
     });
     post.save().then((createdPost) => {
       console.log(createdPost);
@@ -63,6 +69,7 @@ router.put(
       title: req.body.title,
       content: req.body.content,
       imagePath: imagePath,
+      creator: req.body.creator,
     });
     Post.updateOne({ _id: req.params.id }, post).then((result) => {
       res.status(200).json({ message: "Update successful!" });

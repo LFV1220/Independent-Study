@@ -13,6 +13,7 @@ export class FeedListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   isLoading = false;
   isSignedIn: boolean = false;
+  userEmail: string = '';
   private postsSub!: Subscription;
 
   constructor(public postsService: PostsService, private auth: AuthService) {}
@@ -20,6 +21,9 @@ export class FeedListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.auth.isLoggedIn$.subscribe((isLoggedIn) => {
       this.isSignedIn = isLoggedIn;
+    });
+    this.auth.email$.subscribe((email) => {
+      this.userEmail = email;
     });
     this.isLoading = true;
     this.postsService.getPosts();
