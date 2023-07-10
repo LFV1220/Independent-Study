@@ -14,6 +14,7 @@ import { FeedListComponent } from './feed/feed-list/feed-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthService } from './services/auth.service';
+import { NewsListComponent } from './news-list/news-list.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AuthService } from './services/auth.service';
     FeedListComponent,
     LoginComponent,
     RegisterComponent,
+    NewsListComponent,
   ],
   imports: [
     FormsModule,

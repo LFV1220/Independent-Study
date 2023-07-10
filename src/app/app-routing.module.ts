@@ -6,6 +6,7 @@ import { PostCreateComponent } from './post/post-create/post-create.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './auth/auth.guard';
+import { NewsListComponent } from './news-list/news-list.component';
 
 const routes: Routes = [
   { path: '', component: FeedListComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     path: 'edit/:postId',
     component: PostCreateComponent,
   },
+  { path: 'news', component: NewsListComponent },
 ];
 
 @NgModule({
