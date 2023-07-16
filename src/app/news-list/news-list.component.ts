@@ -18,7 +18,7 @@ export class NewsListComponent implements OnInit {
   }
 
   searchNews() {
-    const keyword = this.searchTerm || 'Tampa, FL';
+    const keyword = this.searchTerm || 'Tampa FL';
     this.isLoading = true;
     this.newsService.searchNews(keyword).subscribe((articles) => {
       this.newsList = articles;

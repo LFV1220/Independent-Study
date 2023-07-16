@@ -9,4 +9,5 @@ export const environment = {
     appId: '1:1033883650710:web:3834eba9b7a1d7e02dd0b7',
     measurementId: 'G-NXRNSW1LD4',
   },
+  baseURL: 'https://independent-study-project.onrender.com/api',
 };

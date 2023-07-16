@@ -3,6 +3,8 @@ const multer = require("multer");
 const Post = require("../models/post");
 const router = express.Router();
 
+// const url = "https://independent-study-project.onrender.com";
+
 const MIME_TYPE_MAP = {
   "image/png": "png",
   "image/jpeg": "jpg",
