@@ -3,7 +3,7 @@ const multer = require("multer");
 const Post = require("../models/post");
 const router = express.Router();
 
-const url = "https://independent-study-project.onrender.com";
+// const url = "https://independent-study-project.onrender.com";
 
 const MIME_TYPE_MAP = {
   "image/png": "png",
@@ -34,8 +34,7 @@ router.post(
   (req, res, next) => {
     let imagePath = "";
     if (req.file || req.files.image) {
-      // const url = req.protocol + "://" + req.get("host");
-      console.log("oldURL: " + req.protocol + "://" + req.get("host"));
+      const url = req.protocol + "://" + req.get("host");
       imagePath = url + "/images/" + req.file.filename;
     }
     console.log("imagePath: ", imagePath);
@@ -64,7 +63,7 @@ router.put(
   (req, res, next) => {
     let imagePath = req.body.imagePath;
     if (req.file) {
-      // const url = req.protocol + "://" + req.get("host");
+      const url = req.protocol + "://" + req.get("host");
       image = url + "/images/" + req.file.filename;
     }
     const post = new Post({
