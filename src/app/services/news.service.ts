@@ -8,18 +8,20 @@ import { Article } from '../news-list/article.model';
   providedIn: 'root',
 })
 export class NewsService {
-  private apiKey = '99f9ef006dca4e07bc8753982a5dd5c9';
-  private apiUrl = 'https://newsapi.org/v2';
+  private apiKey = '258ed2c59db2dbfcb1392126f6da4514';
+  private apiUrl = 'https://gnews.io/api/v4';
 
   constructor(private http: HttpClient) {}
 
-  getTopHeadlines(): Observable<any> {
-    const url = `${this.apiUrl}/top-headlines?country=us&apiKey=${this.apiKey}`;
-    return this.http.get(url);
+  getTopHeadlines(): Observable<Article[]> {
+    const url = `${this.apiUrl}/top-headlines?country=us&token=${this.apiKey}`;
+    return this.http
+      .get<any>(url)
+      .pipe(map((response) => response.articles as Article[]));
   }
 
   searchNews(keyword: string): Observable<Article[]> {
-    const url = `${this.apiUrl}/everything?q=${keyword}&apiKey=${this.apiKey}`;
+    const url = `${this.apiUrl}/search?q=${keyword}&token=${this.apiKey}`;
     return this.http
       .get<any>(url)
       .pipe(map((response) => response.articles as Article[]));
