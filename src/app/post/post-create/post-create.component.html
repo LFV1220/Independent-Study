@@ -1,67 +1,69 @@
 <section class="section">
   <div class="container" *ngIf="isSignedIn">
-    <h2 class="title">Create a Post</h2>
-    <progress
-      class="progress is-small is-primary"
-      max="100"
-      *ngIf="isLoading"
-    ></progress>
-    <form
-      [formGroup]="form"
-      (submit)="onSavePost()"
-      #postForm="ngForm"
-      *ngIf="!isLoading"
-    >
-      <div class="field">
-        <label class="label">Title</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Enter the post title"
-            formControlName="title"
-          />
+    <div class="card">
+      <h2 class="title">Create a Post</h2>
+      <progress
+        class="progress is-small is-primary"
+        max="100"
+        *ngIf="isLoading"
+      ></progress>
+      <form
+        [formGroup]="form"
+        (submit)="onSavePost()"
+        #postForm="ngForm"
+        *ngIf="!isLoading"
+      >
+        <div class="field">
+          <label class="label">Title</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              placeholder="Enter the post title"
+              formControlName="title"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">Content</label>
-        <div class="control">
-          <textarea
-            class="textarea"
-            placeholder="Enter the post content"
-            formControlName="content"
-          ></textarea>
+        <div class="field">
+          <label class="label">Content</label>
+          <div class="control">
+            <textarea
+              class="textarea"
+              placeholder="Enter the post content"
+              formControlName="content"
+            ></textarea>
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">Image</label>
-        <div class="control">
-          <input
-            class="input"
-            type="file"
-            accept="image/*"
-            (change)="onImageSelected($event)"
-            name="image"
-          />
+        <div class="field">
+          <label class="label">Image</label>
+          <div class="control">
+            <input
+              class="input"
+              type="file"
+              accept="image/*"
+              (change)="onImageSelected($event)"
+              name="image"
+            />
+          </div>
+          <div
+            class="image-preview"
+            *ngIf="
+              imagePreview !== '' && imagePreview && form.get('image')?.valid
+            "
+          >
+            <img [src]="imagePreview" [alt]="form.value.title" />
+          </div>
         </div>
-        <div
-          class="image-preview"
-          *ngIf="
-            imagePreview !== '' && imagePreview && form.get('image')?.valid
-          "
-        >
-          <img [src]="imagePreview" [alt]="form.value.title" />
-        </div>
-      </div>
 
-      <div class="field">
-        <div class="control">
-          <button type="submit" class="button is-primary">Create Post</button>
+        <div class="field">
+          <div class="control">
+            <button type="submit" class="button is-primary">Create Post</button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
   <div *ngIf="!isSignedIn">
     <p>Please login or register to create a post!</p>

@@ -1,3 +1,16 @@
+:host {
+  display: block;
+  background-color: #d3d3d3;
+}
+
+section.section {
+  min-height: 100vh;
+}
+
+.card {
+  padding: 50px;
+}
+
 .image-preview {
   height: 5rem;
   margin: 1rem 0;
