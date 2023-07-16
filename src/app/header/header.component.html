@@ -1,12 +1,12 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="#">
+    <div class="navbar-item">
       <img
         src="https://1000logos.net/wp-content/uploads/2020/02/South-Florida-Bulls-Logo.png"
         width="60"
         height="120"
       />
-    </a>
+    </div>
 
     <a
       role="button"
@@ -68,7 +68,7 @@
         <ng-template #notsignedin>
           <div class="buttons">
             <a
-              class="button is-primary"
+              class="button is-primary sign-up"
               routerLink="register"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
@@ -86,8 +86,8 @@
           </div>
         </ng-template>
         <ng-template #signedin>
-          <div>
-            <p>Signed In</p>
+          <div class="user">
+            <p>{{ this.userEmail }}</p>
           </div>
           <div>
             <button class="button is-light" (click)="onLogout()">Logout</button>
