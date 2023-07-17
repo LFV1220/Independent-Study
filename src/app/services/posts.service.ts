@@ -14,7 +14,9 @@ export class PostsService {
 
   getPosts() {
     this.http
-      .get<{ message: string; posts: any }>('http://localhost:3000/api/posts')
+      .get<{ message: string; posts: any }>(
+        'https://independent-study-project.onrender.com/api/posts'
+      )
       .pipe(
         map((postData) => {
           return postData.posts.map(
@@ -55,7 +57,7 @@ export class PostsService {
       content: string;
       imagePath: string;
       creator: string;
-    }>('http://localhost:3000/api/posts/' + id);
+    }>('https://independent-study-project.onrender.com/api/posts/' + id);
   }
 
   addPost(title: string, content: string, image: File, creator: string) {
@@ -68,7 +70,7 @@ export class PostsService {
     postData.append('creator', creator);
     this.http
       .post<{ message: string; post: Post }>(
-        'http://localhost:3000/api/posts',
+        'https://independent-study-project.onrender.com/api/posts',
         postData
       )
       .subscribe((responseData) => {
@@ -115,7 +117,10 @@ export class PostsService {
       };
     }
     this.http
-      .put('http://localhost:3000/api/posts/' + id, postData)
+      .put(
+        'https://independent-study-project.onrender.com/api/posts/' + id,
+        postData
+      )
       .subscribe((response) => {
         const updatedPosts = [...this.posts];
         const oldPostIndex = updatedPosts.findIndex((p) => p.id === id);
@@ -135,7 +140,9 @@ export class PostsService {
 
   deletePost(postId: string) {
     this.http
-      .delete<{ message: string }>('http://localhost:3000/api/posts/' + postId)
+      .delete<{ message: string }>(
+        'https://independent-study-project.onrender.com/api/posts/' + postId
+      )
       .subscribe((responseData) => {
         console.log(responseData.message);
         const updatedPosts = this.posts.filter((post) => post.id !== postId);
